@@ -12,6 +12,7 @@
 
     <properties>
         <jdk.version>1.8</jdk.version>
+        <dropwizard.version>0.6.2</dropwizard.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -19,7 +20,7 @@
         <dependency>
             <groupId>com.yammer.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-            <version>0.6.2</version>
+            <version>${dropwizard.version}</version>
         </dependency>
     </dependencies>
 
