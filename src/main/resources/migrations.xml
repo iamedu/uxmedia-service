@@ -9,7 +9,7 @@
     <changeSet id="create-structure" author="iamedu">
 
         <createTable tableName="venue">
-            <column name="name" type="varchar(255)">
+            <column name="venue_name" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
         </createTable>
@@ -21,10 +21,13 @@
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="active" type="boolean" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="venue_owner">
-            <column name="name" type="varchar(255)">
+            <column name="venue_name" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="username" type="varchar(255)">
@@ -32,12 +35,12 @@
             </column>
         </createTable>
 
-        <addForeignKeyConstraint baseColumnNames="name"
+        <addForeignKeyConstraint baseColumnNames="venue_name"
             baseTableName="venue_owner"
             constraintName="fk_venue_owner_name"
             onDelete="RESTRICT"
             onUpdate="CASCADE"
-            referencedColumnNames="name"
+            referencedColumnNames="venue_name"
             referencedTableName="venue"/>
         <addForeignKeyConstraint baseColumnNames="username"
             baseTableName="venue_owner"
@@ -47,15 +50,39 @@
             referencedColumnNames="username"
             referencedTableName="people"/>
 
+        <createTable tableName="venue_search">
+            <column name="name" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="venue_name" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="search_string" type="varchar(1024)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="valid_from" type="datetime">
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="venue_name"
+            baseTableName="venue_search"
+            constraintName="fk_venue_search"
+            onDelete="RESTRICT"
+            onUpdate="CASCADE"
+            referencedColumnNames="venue_name"
+            referencedTableName="venue"/>
+
         <insert tableName="people">
             <column name="username" value="lunario" />
             <column name="password" value="$s0$e0801$FlZS1lurCLGhrgBMg0Ffzg==$meTiDw3FuJotKZOBIaqgCqZ9lzbEhlzS3br4dE1eC9U=" />
         </insert>
         <insert tableName="venue">
-            <column name="name" value="Lunario" />
+            <column name="venue_name" value="Lunario" />
         </insert>
         <insert tableName="venue_owner">
-            <column name="name" value="Lunario" />
+            <column name="venue_name" value="Lunario" />
             <column name="username" value="lunario" />
         </insert>
 
