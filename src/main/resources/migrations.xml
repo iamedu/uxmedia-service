@@ -74,6 +74,77 @@
             referencedColumnNames="venue_name"
             referencedTableName="venue"/>
 
+        <createTable tableName="device">
+            <column name="code" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="venue_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="venue_name"
+            baseTableName="device"
+            constraintName="fk_venue_device"
+            onDelete="RESTRICT"
+            onUpdate="CASCADE"
+            referencedColumnNames="venue_name"
+            referencedTableName="venue"/>
+
+        <createTable tableName="device_ping">
+            <column name="code" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date_ping" type="datetime">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="code"
+            baseTableName="device"
+            constraintName="fk_device_ping"
+            onDelete="RESTRICT"
+            onUpdate="CASCADE"
+            referencedColumnNames="code"
+            referencedTableName="device"/>
+
+        <createTable tableName="media_type">
+            <column name="media_type" type="varchar(512)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="media">
+            <column name="id" type="varchar(512)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="media_type" type="varchar(512)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="venue_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="media_type"
+            baseTableName="media"
+            constraintName="fk_media_type"
+            onDelete="RESTRICT"
+            onUpdate="CASCADE"
+            referencedColumnNames="media_type"
+            referencedTableName="media_type"/>
+        <addForeignKeyConstraint baseColumnNames="venue_name"
+            baseTableName="media"
+            constraintName="fk_media_venue"
+            onDelete="RESTRICT"
+            onUpdate="CASCADE"
+            referencedColumnNames="venue_name"
+            referencedTableName="venue"/>
+
+
         <insert tableName="people">
             <column name="username" value="lunario" />
             <column name="password" value="$s0$e0801$FlZS1lurCLGhrgBMg0Ffzg==$meTiDw3FuJotKZOBIaqgCqZ9lzbEhlzS3br4dE1eC9U=" />
@@ -84,6 +155,16 @@
         <insert tableName="venue_owner">
             <column name="venue_name" value="Lunario" />
             <column name="username" value="lunario" />
+        </insert>
+
+        <insert tableName="media_type">
+            <column name="media_type" value="Twitter" />
+        </insert>
+        <insert tableName="media_type">
+            <column name="media_type" value="Instagram" />
+        </insert>
+        <insert tableName="media_type">
+            <column name="media_type" value="Instagram Video" />
         </insert>
 
     </changeSet>
