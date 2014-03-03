@@ -6,7 +6,14 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-    <changeSet id="create-users" author="iamedu">
+    <changeSet id="create-structure" author="iamedu">
+
+        <createTable tableName="venue">
+            <column name="name" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+
         <createTable tableName="people">
             <column name="username" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -16,9 +23,40 @@
             </column>
         </createTable>
 
+        <createTable tableName="venue_owner">
+            <column name="name" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="name"
+            baseTableName="venue_owner"
+            constraintName="fk_venue_owner_name"
+            onDelete="RESTRICT"
+            onUpdate="CASCADE"
+            referencedColumnNames="name"
+            referencedTableName="venue"/>
+        <addForeignKeyConstraint baseColumnNames="username"
+            baseTableName="venue_owner"
+            constraintName="fk_venue_owner_username"
+            onDelete="RESTRICT"
+            onUpdate="CASCADE"
+            referencedColumnNames="username"
+            referencedTableName="people"/>
+
         <insert tableName="people">
             <column name="username" value="lunario" />
             <column name="password" value="$s0$e0801$FlZS1lurCLGhrgBMg0Ffzg==$meTiDw3FuJotKZOBIaqgCqZ9lzbEhlzS3br4dE1eC9U=" />
+        </insert>
+        <insert tableName="venue">
+            <column name="name" value="Lunario" />
+        </insert>
+        <insert tableName="venue_owner">
+            <column name="name" value="Lunario" />
+            <column name="username" value="lunario" />
         </insert>
 
     </changeSet>
