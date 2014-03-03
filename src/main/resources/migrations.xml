@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-    <changeSet id="1" author="iamedu">
+    <changeSet id="create-users" author="iamedu">
         <createTable tableName="people">
             <column name="username" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -15,6 +15,12 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+
+        <insert tableName="people">
+            <column name="username" value="lunario" />
+            <column name="password" value="$s0$e0801$FlZS1lurCLGhrgBMg0Ffzg==$meTiDw3FuJotKZOBIaqgCqZ9lzbEhlzS3br4dE1eC9U=" />
+        </insert>
+
     </changeSet>
 </databaseChangeLog>
 
