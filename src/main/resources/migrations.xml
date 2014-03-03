@@ -115,27 +115,29 @@
             </column>
         </createTable>
 
+        <createTable tableName="media_status">
+            <column name="media_status" type="varchar(512)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+
         <createTable tableName="media">
             <column name="id" type="varchar(512)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="venue_name" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="media_type" type="varchar(512)">
                 <constraints nullable="false"/>
             </column>
-            <column name="venue_name" type="varchar(255)">
+            <column name="media_status" type="varchar(512)">
                 <constraints nullable="false"/>
             </column>
             <column name="date_created" type="datetime">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="media_type"
-            baseTableName="media"
-            constraintName="fk_media_type"
-            onDelete="RESTRICT"
-            onUpdate="CASCADE"
-            referencedColumnNames="media_type"
-            referencedTableName="media_type"/>
         <addForeignKeyConstraint baseColumnNames="venue_name"
             baseTableName="media"
             constraintName="fk_media_venue"
@@ -143,7 +145,20 @@
             onUpdate="CASCADE"
             referencedColumnNames="venue_name"
             referencedTableName="venue"/>
-
+        <addForeignKeyConstraint baseColumnNames="media_status"
+            baseTableName="media"
+            constraintName="fk_media_status"
+            onDelete="RESTRICT"
+            onUpdate="CASCADE"
+            referencedColumnNames="media_status"
+            referencedTableName="media_status"/>
+        <addForeignKeyConstraint baseColumnNames="media_type"
+            baseTableName="media"
+            constraintName="fk_media_type"
+            onDelete="RESTRICT"
+            onUpdate="CASCADE"
+            referencedColumnNames="media_type"
+            referencedTableName="media_type"/>
 
         <insert tableName="people">
             <column name="username" value="lunario" />
